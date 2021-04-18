@@ -1,13 +1,16 @@
 const router = require('express').Router()
+const ACCEPTED_LANGUAGE = [ 'and', 'because', 'can']
 
 router.route('/').get( (req, res) => {
-
+    // const inputString = req.body.inputString
+    const inputString = ' bebe because  Eren and Mikasa are very happy! or \nsad?'
+    const stringArray = inputString.split(/(\s+)/);
+    const acceptedObj = processDFA(stringArray)
+    // const test = {name: 'Eren'}
+    res.json(acceptedObj)
 })
 
-const processDFA = (inputString) => {
-    const ACCEPTED_LANGUAGE = [ 'and', 'because', 'can']
-    // const inputString = ' bebe because  Eren and Mikasa are very happy! or \nsad?'
-    const stringArray = inputString.split(/(\s+)/);
+const processDFA = (stringArray) => {
     const acceptedObj = {}
     for(let i=0 ; i<stringArray.length ; i++){                   // for each word in the string          (' baebe because  Eren and Mikasa are very happy! or \nsad?')
         for(let j=0 ; j<ACCEPTED_LANGUAGE.length ; j++){         // for each accepted language           ( [ 'baebe', 'because', 'can'] )
@@ -33,8 +36,7 @@ const processDFA = (inputString) => {
             }
         }
     }
-    console.log({stringArray})
-    console.log({acceptedObj})
+    return acceptedObj
 }
 
 module.exports = router
