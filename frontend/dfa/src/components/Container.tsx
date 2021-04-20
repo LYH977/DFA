@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import InputString from "./InputString";
 import Checkboxes from "./pattern/Checkboxes";
 import Occurences from "./pattern/Occurences";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -14,29 +15,47 @@ const useStyles = makeStyles((theme: Theme) =>
       gridTemplateColumns: "repeat(12, 1fr)",
       gridGap: theme.spacing(3),
     },
-    paper: {
-      padding: theme.spacing(1),
+    leftPaper: {
+      padding: 10,
       marginTop: theme.spacing(5),
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
       height: "78vh",
-      textAlign: "center",
-      color: theme.palette.text.secondary,
+      fontSize: "20px",
       whiteSpace: "normal",
       position: "relative",
+      // overflow: "auto",
+    },
+    rightPaper: {
+      padding: 10,
+      marginTop: theme.spacing(5),
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      height: "78vh",
+      whiteSpace: "normal",
+      position: "relative",
+      overflow: "auto",
     },
     rightGridItem: {
       padding: theme.spacing(1),
       margin: theme.spacing(1),
-
       position: "relative",
-
       textAlign: "center",
       color: theme.palette.text.secondary,
       whiteSpace: "normal",
     },
     test: {
       flexGrow: 1,
+    },
+    inherit: {
+      weight: "100%",
+      height: "100%",
+    },
+    checkbox: {
+      height: "40%",
+    },
+    occurence: {
+      height: "40%",
     },
   })
 );
@@ -47,21 +66,31 @@ export default function CSSGrid() {
   return (
     <div>
       <Grid container spacing={2}>
-        <Grid item xs={8}>
-          <Paper className={classes.paper} elevation={10}>
+        <Grid item xs={9}>
+          <Paper className={classes.leftPaper} elevation={10}>
             <InputString />
           </Paper>
         </Grid>
 
-        <Grid item xs={4} spacing={2}>
-          <Paper className={classes.paper} elevation={10}>
-            <Grid item direction="column" justify="center" alignItems="center" xs>
-              <Checkboxes />
-            </Grid>
-
-            <Grid item direction="column" justify="center" alignItems="center" xs>
-              <Occurences />
-            </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.rightPaper} elevation={10}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="space-around"
+              // p={1}
+              // m={1}
+              bgcolor="background.paper"
+              className={classes.inherit}
+            >
+              <Box p={1} className={classes.checkbox}>
+                <Checkboxes />
+              </Box>
+              <Box p={1} className={classes.occurence}>
+                <Occurences />
+              </Box>
+            </Box>
           </Paper>
         </Grid>
       </Grid>

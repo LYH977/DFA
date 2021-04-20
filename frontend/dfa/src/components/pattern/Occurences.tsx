@@ -15,23 +15,25 @@ const useStyles = makeStyles({
   cardRoot: {
     minWidth: 275,
     overflow: "auto",
+    minHeight: "100%",
+    maxHeight: "100%",
   },
   listRoot: {
     display: "flex",
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
+
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
+
   formControl: {
     margin: 3,
+  },
+  div: {
+    weight: "inherit",
+    height: "100%",
+    position: "relative",
+    // background: "red",
   },
 });
 
@@ -41,16 +43,18 @@ function Occurences() {
   const [occurence, setOccurence] = useState<number>(1);
 
   return (
-    <Card className={classes.cardRoot} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
-          Pattern : '{name}'
-        </Typography>
-        <Typography className={classes.title} component="h2">
-          Occurence : {occurence}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className={classes.div}>
+      <Card className={classes.cardRoot} variant="outlined">
+        <CardContent>
+          <Typography className={classes.title} color="textSecondary" gutterBottom>
+            Pattern : '{name}'
+          </Typography>
+          <Typography className={classes.title} component="h2">
+            Occurence : {occurence}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 

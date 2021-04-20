@@ -14,25 +14,27 @@ import Checkbox from "@material-ui/core/Checkbox";
 const useStyles = makeStyles({
   cardRoot: {
     minWidth: 275,
-    maxHeight: 400,
+    minHeight: "100%",
+    maxHeight: "100%",
+
     overflow: "auto",
   },
   listRoot: {
     display: "flex",
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
-  },
+
   title: {
     fontSize: 14,
   },
-  pos: {
-    marginBottom: 12,
-  },
+
   formControl: {
     margin: 3,
+  },
+  div: {
+    weight: "inherit",
+    height: "100%",
+    position: "relative",
+    // background: "red",
   },
 });
 
@@ -52,7 +54,9 @@ function Checkboxes() {
     jas6on: false,
     antoi7ne: false,
   });
+
   const classes = useStyles();
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckboxList({
       ...checkboxList,
@@ -61,28 +65,28 @@ function Checkboxes() {
   };
 
   return (
-    <Card className={classes.cardRoot} variant="outlined">
-      <CardContent>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-              Pattern Found
-            </Typography>
-          </FormLabel>
-          <FormGroup>
-            {Object.keys(checkboxList)
-              .sort()
-              .map((name, id) => (
-                <FormControlLabel
-                  key={id}
-                  control={<Checkbox checked={checkboxList[name]} onChange={handleChange} name={name} />}
-                  label={name}
-                />
-              ))}
-          </FormGroup>
-        </FormControl>
-      </CardContent>
-    </Card>
+    <div className={classes.div}>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>
+        Pattern Found
+      </Typography>
+      <Card className={classes.cardRoot} variant="outlined">
+        <CardContent>
+          <FormControl component="fieldset" className={classes.formControl}>
+            <FormGroup>
+              {Object.keys(checkboxList)
+                .sort()
+                .map((name, id) => (
+                  <FormControlLabel
+                    key={id}
+                    control={<Checkbox checked={checkboxList[name]} onChange={handleChange} name={name} />}
+                    label={name}
+                  />
+                ))}
+            </FormGroup>
+          </FormControl>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
