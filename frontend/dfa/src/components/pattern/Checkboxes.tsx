@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -10,6 +10,8 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { PatternContext } from "../../contexts";
+import { TOGGLE_PATTERN_ISCHECKED } from "../Constant";
 
 const useStyles = makeStyles({
   cardRoot: {
@@ -38,12 +40,15 @@ const useStyles = makeStyles({
   },
 });
 
-type Props = {
+type Checkbox = {
   [key: string]: boolean;
 };
 
 function Checkboxes() {
-  const [checkboxList, setCheckboxList] = useState<Props>({
+  const inputContext = useContext(PatternContext);
+  const classes = useStyles();
+
+  const [checkboxList, setCheckboxList] = useState<Checkbox>({
     gilad: true,
     jason: false,
     antoine: false,
@@ -55,13 +60,12 @@ function Checkboxes() {
     antoi7ne: false,
   });
 
-  const classes = useStyles();
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCheckboxList({
       ...checkboxList,
       [event.target.name]: event.target.checked,
     });
+    inputContext.dispatch({ type: TOGGLE_PATTERN_ISCHECKED, payload: event.target.name });
   };
 
   return (
@@ -73,12 +77,14 @@ function Checkboxes() {
         <CardContent>
           <FormControl component="fieldset" className={classes.formControl}>
             <FormGroup>
-              {Object.keys(checkboxList)
+              {Object.keys(inputContext.state)
                 .sort()
                 .map((name, id) => (
                   <FormControlLabel
                     key={id}
-                    control={<Checkbox checked={checkboxList[name]} onChange={handleChange} name={name} />}
+                    control={
+                      <Checkbox checked={inputContext.state[name].isChecked} onChange={handleChange} name={name} />
+                    }
                     label={name}
                   />
                 ))}

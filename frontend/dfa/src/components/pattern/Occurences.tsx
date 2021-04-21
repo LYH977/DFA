@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { PatternContext, PatternObj } from "../../contexts";
+//MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -10,6 +12,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles({
   cardRoot: {
@@ -38,20 +41,35 @@ const useStyles = makeStyles({
 });
 
 function Occurences() {
+  const inputContext = useContext(PatternContext);
+
   const classes = useStyles();
-  const [name, setName] = useState<string>("test");
-  const [occurence, setOccurence] = useState<number>(1);
+  // const [occurence, setOccurence] = useState<PatternObj | null>(null);
+
+  // useEffect(() => {
+  //   setOccurence(inputContext.state);
+  // }, [inputContext.state]);
 
   return (
     <div className={classes.div}>
       <Card className={classes.cardRoot} variant="outlined">
         <CardContent>
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            Pattern : '{name}'
-          </Typography>
-          <Typography className={classes.title} component="h2">
-            Occurence : {occurence}
-          </Typography>
+          {inputContext.state &&
+            Object.keys(inputContext.state)
+              .sort()
+              .map((name, id) =>
+                inputContext.state[name].isChecked ? (
+                  <>
+                    <Typography className={classes.title} component="h2" gutterBottom>
+                      Pattern : '{name}'
+                    </Typography>
+                    <Typography className={classes.title} component="h2">
+                      Occurence : {inputContext.state[name].occurence}
+                    </Typography>
+                    <Divider />
+                  </>
+                ) : null
+              )}
         </CardContent>
       </Card>
     </div>

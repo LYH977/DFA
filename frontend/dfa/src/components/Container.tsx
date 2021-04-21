@@ -79,8 +79,6 @@ export default function CSSGrid() {
               flexDirection="column"
               alignItems="center"
               justifyContent="space-around"
-              // p={1}
-              // m={1}
               bgcolor="background.paper"
               className={classes.inherit}
             >
