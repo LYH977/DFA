@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import UploadFileDialog from "./Dialog";
 
 //MUI stuff
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -8,8 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PublishIcon from "@material-ui/icons/Publish";
-import { Dialog } from "@material-ui/core";
-import UploadFileDialog from "./Dialog";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

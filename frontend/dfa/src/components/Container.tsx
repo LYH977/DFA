@@ -1,13 +1,13 @@
 import React from "react";
+import InputString from "./InputString";
+import Checkboxes from "./pattern/Checkboxes";
+import Occurences from "./pattern/Occurences";
+//MUI
+import Box from "@material-ui/core/Box";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import InputString from "./InputString";
-import Checkboxes from "./pattern/Checkboxes";
-import Occurences from "./pattern/Occurences";
-import Box from "@material-ui/core/Box";
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
