@@ -13,6 +13,12 @@ import { TransitionProps } from "@material-ui/core/transitions";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
+declare module "axios" {
+  export interface AxiosRequestConfig {
+    inputString: string;
+  }
+}
+
 type Props = {
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -44,12 +50,16 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
 
   const handleConfirm = async () => {
     settt("loading");
+    setIsInValid(true);
+
     try {
       let response = await axios.get("http://localhost:5000/api/dfa", {
         inputString: inputString,
       });
+      console.log(response.data);
       settt("done");
     } catch (error) {
+      console.log(error);
       settt("error");
     }
 
@@ -76,7 +86,7 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
     let reader = new FileReader();
     reader.onload = async function (event: ProgressEvent<FileReader>) {
       let text = (event.target as FileReader).result;
-      alert(text);
+      // alert(text);
       setInputString(text as string);
     };
     reader.readAsText(file);

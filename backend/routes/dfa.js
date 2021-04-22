@@ -6,10 +6,15 @@ router.route('/').get( async(req, res) => {
     const inputString = ' bebe because  Eren and Mikasa are very happy! or \nsad?'
     const stringArray = inputString.split(/(\s+)/);
     const acceptedObj = processDFA(stringArray)
-    await sleep(5000);
+    await sleep(3000);
     // const test = {name: 'Eren'}
-    res.json(acceptedObj)
+    return res.json(acceptedObj)
 })
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+} 
 
 const processDFA = (stringArray) => {
     const acceptedObj = {}
