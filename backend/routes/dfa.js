@@ -1,11 +1,12 @@
 const router = require('express').Router()
 const ACCEPTED_LANGUAGE = [ 'and', 'because', 'can']
 
-router.route('/').get( (req, res) => {
+router.route('/').get( async(req, res) => {
     // const inputString = req.body.inputString
     const inputString = ' bebe because  Eren and Mikasa are very happy! or \nsad?'
     const stringArray = inputString.split(/(\s+)/);
     const acceptedObj = processDFA(stringArray)
+    await sleep(5000);
     // const test = {name: 'Eren'}
     res.json(acceptedObj)
 })

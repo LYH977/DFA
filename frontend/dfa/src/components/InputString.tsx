@@ -43,7 +43,7 @@ function InputString() {
   const classes = useStyles();
   const inputContext = useContext(InputContext);
   const t1 = "1212 ";
-  const t2 = "43434 ";
+  const t2 = "armin ";
 
   return (
     <div className={classes.div}>
