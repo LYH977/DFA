@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
 //MUI
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -12,12 +12,14 @@ import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { InputContext, PatternContext } from "../contexts";
+import { SET_INPUT, SET_PATTERN } from "./Constant";
 
-declare module "axios" {
-  export interface AxiosRequestConfig {
-    inputString: string;
-  }
-}
+// declare module "axios" {
+//   export interface AxiosRequestConfig {
+//     inputString: string;
+//   }
+// }
 
 type Props = {
   openModal: boolean;
@@ -42,6 +44,9 @@ const useStyles = makeStyles((theme: Theme) =>
 //-----------------------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------------------------
 const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
+  const inputContext = useContext(InputContext);
+  const patternContext = useContext(PatternContext);
+
   const inputRef = useRef<HTMLInputElement>(null);
   const classes = useStyles();
   const [isInValid, setIsInValid] = useState<boolean>(true);
@@ -53,15 +58,17 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
     setIsInValid(true);
 
     try {
-      let response = await axios.get("http://localhost:5000/api/dfa", {
+      let response = await axios.post("http://localhost:5000/api/dfa/result", {
         inputString: inputString,
       });
+
       console.log(response.data);
-      settt("done");
+      inputContext.dispatch({ type: SET_INPUT, payload: response.data.formattedString });
+      patternContext.dispatch({ type: SET_PATTERN, payload: response.data.patterns });
     } catch (error) {
       console.log(error);
-      settt("error");
     }
+    settt("Confirm");
 
     handleClose();
   };

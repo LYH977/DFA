@@ -4,11 +4,23 @@ import { SET_INPUT, SET_PATTERN, TOGGLE_PATTERN_ISCHECKED } from "../components/
 export const PatternContext = React.createContext<any>(null);
 export const InputContext = React.createContext<any>(null);
 //--------------------------------------------------------------------------------------------------
+
+export interface InputContent {
+  name: string;
+  isAccepted: boolean;
+  pattern: string | null;
+}
+
 interface iAction {
   type: string;
-  payload: string;
+  payload: InputContent[];
 }
-const inputReducer = (state: string, action: iAction) => {
+
+interface iContext {
+  state: InputContent[];
+  dispatch: React.Dispatch<iAction>;
+}
+const inputReducer = (state: InputContent[], action: iAction) => {
   switch (action.type) {
     case SET_INPUT:
       return action.payload;
@@ -62,14 +74,24 @@ export const ContextProvider: React.FC = ({ children }) => {
     armin: { occurence: 1, isChecked: false },
   };
   const [pattern, dispatchPattern] = useReducer(patternReducer, testpattern);
-  const [input, dispatchInput] = useReducer(inputReducer, text);
+  const [input, dispatchInput] = useReducer(inputReducer, [
+    {
+      name: "and",
+      isAccepted: true,
+      pattern: "and",
+    },
+  ]);
   const pProvider: pContext = {
     state: pattern,
     dispatch: dispatchPattern,
   };
+  const iProvider: iContext = {
+    state: input,
+    dispatch: dispatchInput,
+  };
   return (
     <PatternContext.Provider value={pProvider}>
-      <InputContext.Provider value={{ input, dispatchInput }}>{children}</InputContext.Provider>
+      <InputContext.Provider value={iProvider}>{children}</InputContext.Provider>
     </PatternContext.Provider>
   );
 };

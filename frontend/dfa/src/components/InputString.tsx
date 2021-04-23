@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { InputContext } from "../contexts";
+import { InputContent, InputContext } from "../contexts";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -26,8 +26,9 @@ const useStyles = makeStyles({
   },
   coloredTitle: {
     fontSize: 14,
-    background: "red", //rgb(48, 91, 161)
-    color: "white",
+    fontWeight: "bold",
+    // background: "red", //rgb(48, 91, 161)
+    color: "red",
   },
   pos: {
     marginBottom: 12,
@@ -52,15 +53,14 @@ function InputString() {
       </Typography>
       <Card className={classes.root}>
         <CardContent>
-          {/* <Typography className={classes.title} color="textPrimary" gutterBottom>
-            {inputContext.input}
-          </Typography> */}
-          <Typography className={classes.title} color="textPrimary" display="inline">
-            {t1}
-          </Typography>
-          <Typography className={classes.coloredTitle} color="textPrimary" display="inline">
-            {t2}
-          </Typography>
+          {inputContext.state.map((obj: InputContent, id: number) => {
+            let style = obj.isAccepted ? classes.coloredTitle : classes.title;
+            return (
+              <Typography className={style} color="textPrimary" display="inline" key={id}>
+                {obj.name}
+              </Typography>
+            );
+          })}
         </CardContent>
       </Card>
     </div>

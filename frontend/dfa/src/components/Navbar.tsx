@@ -9,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PublishIcon from "@material-ui/icons/Publish";
+import LanguageIcon from "@material-ui/icons/Language";
+import Popover from "@material-ui/core/Popover";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,12 +23,48 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    popoverText: {
+      padding: theme.spacing(2),
+    },
   })
 );
 
 export const Navbar: React.FC = () => {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState<boolean>(false);
+
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  let popoverMarkup = (
+    <Popover
+      id={id}
+      open={open}
+      anchorEl={anchorEl}
+      onClose={handleClose}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "left",
+      }}
+      transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+      }}
+    >
+      <Typography className={classes.popoverText}>The content of the Popover.</Typography>
+      <Typography className={classes.popoverText}>The content of the Popover.</Typography>
+    </Popover>
+  );
 
   return (
     <div className={classes.root}>
@@ -35,6 +73,16 @@ export const Navbar: React.FC = () => {
           <Typography variant="h6" className={classes.title}>
             DFA
           </Typography>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={handleClick}
+          >
+            <LanguageIcon />
+          </IconButton>
+          {popoverMarkup}
           <IconButton
             edge="start"
             className={classes.menuButton}
