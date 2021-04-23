@@ -28,6 +28,10 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
+  boldText: {
+    fontSize: 14,
+    fontWeight: "bold",
+  },
 
   formControl: {
     margin: 3,
@@ -44,11 +48,6 @@ function Occurences() {
   const inputContext = useContext(PatternContext);
 
   const classes = useStyles();
-  // const [occurence, setOccurence] = useState<PatternObj | null>(null);
-
-  // useEffect(() => {
-  //   setOccurence(inputContext.state);
-  // }, [inputContext.state]);
 
   return (
     <div className={classes.div}>
@@ -61,7 +60,10 @@ function Occurences() {
                 inputContext.state[name].isChecked ? (
                   <>
                     <Typography className={classes.title} component="h2" gutterBottom>
-                      Pattern : '{name}'
+                      {"Pattern : "}
+                      <Typography className={classes.boldText} display="inline">
+                        '{name}'
+                      </Typography>
                     </Typography>
                     <Typography className={classes.title} component="h2">
                       Occurence : {inputContext.state[name].occurence}

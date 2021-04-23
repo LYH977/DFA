@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import UploadFileDialog from "./Dialog";
+import axios from "axios";
 
 //MUI stuff
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
@@ -11,6 +12,12 @@ import IconButton from "@material-ui/core/IconButton";
 import PublishIcon from "@material-ui/icons/Publish";
 import LanguageIcon from "@material-ui/icons/Language";
 import Popover from "@material-ui/core/Popover";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,14 +33,32 @@ const useStyles = makeStyles((theme: Theme) =>
     popoverText: {
       padding: theme.spacing(2),
     },
+    popoverStyle: {
+      height: 300,
+    },
+    listItem: {
+      margin: 0,
+    },
   })
 );
 
 export const Navbar: React.FC = () => {
   const classes = useStyles();
   const [openModal, setOpenModal] = useState<boolean>(false);
-
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [languages, setLanguages] = useState<string[] | null>(null);
+  useEffect(() => {
+    const getLanguages = async () => {
+      try {
+        let response = await axios.get("http://localhost:5000/api/dfa/languages");
+        console.log("sddf", response.data);
+        setLanguages(response.data.list);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getLanguages();
+  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -48,6 +73,7 @@ export const Navbar: React.FC = () => {
 
   let popoverMarkup = (
     <Popover
+      className={classes.popoverStyle}
       id={id}
       open={open}
       anchorEl={anchorEl}
@@ -61,8 +87,15 @@ export const Navbar: React.FC = () => {
         horizontal: "center",
       }}
     >
-      <Typography className={classes.popoverText}>The content of the Popover.</Typography>
-      <Typography className={classes.popoverText}>The content of the Popover.</Typography>
+      {languages && (
+        <List dense={true}>
+          {languages.map((language, id) => (
+            <ListItem key={id}>
+              <ListItemText className={classes.listItem} primary={`- ${language}`} secondary={null} />
+            </ListItem>
+          ))}
+        </List>
+      )}
     </Popover>
   );
 

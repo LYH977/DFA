@@ -4,13 +4,10 @@ const ACCEPTED_LANGUAGE_OBJ = require('../models/language')
 router.route('/result').post( async(req, res) => {
     try{
         const inputString = req.body.inputString
-    // const inputString = ' bebe because  Eren, and Mikasa are very happy! or \nsad? total landmass of 329,847 square kilometres (127,350 sq mi)'
-    // const stringArray = inputString.split(/(\s+)/);
-    const stringArray = inputString.split(/(\W+)/);
-
-    const result = processDFA(stringArray)
-    // await sleep(3000);
-    return res.json(result)
+        const stringArray = inputString.split(/(\W+)/);
+        const result = processDFA(stringArray)
+        // await sleep(3000);
+        return res.json(result)
     }
     catch(error){
         console.log('erer')
@@ -18,7 +15,19 @@ router.route('/result').post( async(req, res) => {
     }
 })
 
+router.route('/languages').get( async(req, res) =>{
+    const keys = Object.keys(ACCEPTED_LANGUAGE_OBJ)
+    let list=[]
 
+    for( let i=0; i<keys.length ; i++){
+        key = keys[i]
+        for( let j =0; j<ACCEPTED_LANGUAGE_OBJ[key].length ; j++){
+            list.push(ACCEPTED_LANGUAGE_OBJ[key][j])
+        }
+    }
+    // console.log(list)
+    return res.json({list})
+})
 
 const processDFA = (stringArray) => {
         const formattedString = []

@@ -1,12 +1,10 @@
 import React, { useState, useContext } from "react";
-import { InputContent, InputContext } from "../contexts";
+import { InputContent, InputContext, PatternContext } from "../contexts";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import { SET_INPUT } from "./Constant";
 
 const useStyles = makeStyles({
   root: {
@@ -26,9 +24,9 @@ const useStyles = makeStyles({
   },
   coloredTitle: {
     fontSize: 14,
-    fontWeight: "bold",
-    // background: "red", //rgb(48, 91, 161)
-    color: "red",
+    // fontWeight: "bold",
+    background: "rgb(255, 115, 115)",
+    // color: "white",
   },
   pos: {
     marginBottom: 12,
@@ -43,8 +41,8 @@ const useStyles = makeStyles({
 function InputString() {
   const classes = useStyles();
   const inputContext = useContext(InputContext);
-  const t1 = "1212 ";
-  const t2 = "armin ";
+  const patternContext = useContext(PatternContext);
+  // console.log({ patternContext });
 
   return (
     <div className={classes.div}>
@@ -54,7 +52,11 @@ function InputString() {
       <Card className={classes.root}>
         <CardContent>
           {inputContext.state.map((obj: InputContent, id: number) => {
-            let style = obj.isAccepted ? classes.coloredTitle : classes.title;
+            let lowercaseName = obj.name.toLowerCase();
+            let style =
+              patternContext.state[lowercaseName] && patternContext.state[lowercaseName]["isChecked"]
+                ? classes.coloredTitle
+                : classes.title;
             return (
               <Typography className={style} color="textPrimary" display="inline" key={id}>
                 {obj.name}

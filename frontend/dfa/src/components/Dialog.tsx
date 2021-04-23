@@ -1,5 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
+import { InputContext, PatternContext } from "../contexts";
+import { SET_INPUT, SET_PATTERN } from "./Constant";
 //MUI
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -12,8 +14,10 @@ import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import CancelIcon from "@material-ui/icons/Cancel";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
-import { InputContext, PatternContext } from "../contexts";
-import { SET_INPUT, SET_PATTERN } from "./Constant";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Snackbar from "@material-ui/core/Snackbar";
+
+import MuiAlert, { AlertProps, Color } from "@material-ui/lab/Alert";
 
 // declare module "axios" {
 //   export interface AxiosRequestConfig {
@@ -26,6 +30,9 @@ type Props = {
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+function Alert(props: AlertProps) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
@@ -37,6 +44,18 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     buttonText: {
       fontSize: 12,
+    },
+    buttonProgress: {
+      // color: 'green[500]',
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      marginTop: -12,
+      marginLeft: -12,
+    },
+    wrapper: {
+      margin: theme.spacing(1),
+      position: "relative",
     },
   })
 );
@@ -51,26 +70,31 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
   const classes = useStyles();
   const [isInValid, setIsInValid] = useState<boolean>(true);
   const [inputString, setInputString] = useState<string>("");
-  const [tt, settt] = useState<string>("Confirm");
+  const [loading, setLoading] = useState<boolean>(false);
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [severity, setSeverity] = useState<Color>("info");
+  const [message, setMessage] = useState("No message");
 
   const handleConfirm = async () => {
-    settt("loading");
     setIsInValid(true);
-
+    setLoading(true);
     try {
       let response = await axios.post("http://localhost:5000/api/dfa/result", {
         inputString: inputString,
       });
-
-      console.log(response.data);
       inputContext.dispatch({ type: SET_INPUT, payload: response.data.formattedString });
       patternContext.dispatch({ type: SET_PATTERN, payload: response.data.patterns });
+      setSeverity("success");
+      setMessage("Successfully processed DFA");
     } catch (error) {
       console.log(error);
+      setSeverity("error");
+      setMessage("Failed to process DFA");
     }
-    settt("Confirm");
 
     handleClose();
+    setOpenSnackbar(true);
+    setLoading(false);
   };
 
   const handleClose = () => {
@@ -112,6 +136,14 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
     return false;
   };
 
+  const handleSnackbarClose = (event?: React.SyntheticEvent, reason?: string) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnackbar(false);
+  };
+
   return (
     <div>
       <Dialog
@@ -121,25 +153,30 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
         onClose={handleClose}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-        onEscapeKeyDown={handleClose}
+        disableEscapeKeyDown
+        disableBackdropClick
       >
         <DialogTitle id="alert-dialog-slide-title">{"New File Upload"}</DialogTitle>
         <DialogContent style={{ height: 70 }}>
-          <input type="file" accept=".txt" onChange={onSelectFile} ref={inputRef} />
+          <input type="file" accept=".txt" onChange={onSelectFile} ref={inputRef} disabled={loading} />
         </DialogContent>
 
         <DialogActions>
-          <Button
-            onClick={handleConfirm}
-            variant="contained"
-            color="primary"
-            startIcon={<CloudUploadIcon />}
-            className={classes.buttonText}
-            disabled={isInValid}
-            size="small"
-          >
-            {tt}
-          </Button>
+          <div className={classes.wrapper}>
+            <Button
+              onClick={handleConfirm}
+              variant="contained"
+              color="primary"
+              startIcon={<CloudUploadIcon />}
+              className={classes.buttonText}
+              disabled={isInValid}
+              size="small"
+            >
+              Confirm
+            </Button>
+            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+          </div>
+
           <Button
             onClick={handleClose}
             variant="contained"
@@ -147,11 +184,17 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
             endIcon={<CancelIcon />}
             className={classes.buttonText}
             size="small"
+            disabled={loading}
           >
             Cancel
           </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={severity}>
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
