@@ -22,3 +22,18 @@ app.listen(port, () =>{
 
 
 
+   if(input) 
+        return trapState()
+    return acceptedState('and')
+
+    const state_q16 = (input) => {
+    if(input) {
+        let firstChar = input.toLowerCase().charAt(0) 
+        switch(firstChar){
+            case 'l': return state_q17(input.substring(1))
+            default: return trapState()
+        } 
+    }
+    return acceptedState('clear')
+   
+}
