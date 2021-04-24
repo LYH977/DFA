@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const ACCEPTED_LANGUAGE_OBJ = require('../models/language')
+const checkState_q0 = require('../models/states')
+
 
 router.route('/result').post( async(req, res) => {
     try{
@@ -10,7 +12,7 @@ router.route('/result').post( async(req, res) => {
         return res.json(result)
     }
     catch(error){
-        console.log('erer')
+        console.log('error')
         return res.json(error)
     }
 })
@@ -29,7 +31,7 @@ router.route('/languages').get( async(req, res) =>{
     return res.json({list})
 })
 
-const processDFA = (stringArray) => {
+const processDFA1 = (stringArray) => {
         const formattedString = []
         const patterns = {}
         for(let i=0 ; i<stringArray.length ; i++){                   // for each word in the string          (' baebe because  Eren and Mikasa are very happy! or \nsad?')
@@ -58,6 +60,26 @@ const processDFA = (stringArray) => {
              if (isAccepted){
                 if(patterns.hasOwnProperty(lang)){  patterns[lang]['occurence']++   }
                 else{   patterns[lang] = {occurence:1, isChecked:false}   }
+            }
+        }
+        return {formattedString, patterns}
+}
+
+const processDFA = (stringArray) => {
+        const formattedString = []
+        const patterns = {}
+        for(let i=0 ; i<stringArray.length ; i++){                   // for each word in the string          (' baebe because  Eren and Mikasa are very happy! or \nsad?')
+            let word = stringArray[i].toLowerCase()
+
+            let result = checkState_q0(word)
+            formattedString.push({
+                ...result,
+                name: stringArray[i]
+                
+            })
+             if (result.isAccepted){
+                if(patterns.hasOwnProperty(result.pattern)){  patterns[result.pattern]['occurence']++   }
+                else{   patterns[result.pattern] = {occurence:1, isChecked:false}   }
             }
         }
         return {formattedString, patterns}

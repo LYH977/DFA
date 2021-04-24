@@ -9,6 +9,7 @@ export interface InputContent {
   name: string;
   isAccepted: boolean;
   pattern: string | null;
+  process: string;
 }
 
 interface iAction {
@@ -77,6 +78,7 @@ export const ContextProvider: React.FC = ({ children }) => {
       name: "Waiting for text file upload...",
       isAccepted: true,
       pattern: null,
+      process: "empty",
     },
   ]);
   const pProvider: pContext = {

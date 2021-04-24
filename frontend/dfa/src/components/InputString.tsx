@@ -21,12 +21,22 @@ const useStyles = makeStyles({
   },
   title: {
     fontSize: 14,
+    "&:hover": {
+      backgroundColor: "rgb(255, 222, 222)",
+      cursor: "pointer",
+    },
+  },
+  colorlessText: {
+    fontSize: 14,
   },
   coloredTitle: {
     fontSize: 14,
-    // fontWeight: "bold",
-    background: "rgb(255, 115, 115)",
-    // color: "white",
+    background: "rgb(255, 150, 150)",
+    "&:hover": {
+      background: "rgb(255, 0, 0)",
+      cursor: "pointer",
+      // color: "white",
+    },
   },
   pos: {
     marginBottom: 12,
@@ -46,7 +56,7 @@ function InputString() {
 
   return (
     <div className={classes.div}>
-      <Typography className={classes.title} color="textPrimary" gutterBottom>
+      <Typography className={classes.colorlessText} color="textPrimary" gutterBottom>
         Input
       </Typography>
       <Card className={classes.root}>

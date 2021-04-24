@@ -1,793 +1,1169 @@
+const removeFirstChar = (str) =>{
+    return str.substring(1)
+}
+
+
 const checkState_q0 = (input) =>{
     let firstChar =input.toLowerCase().charAt(0) 
+    let process = `${firstChar}`
     switch(firstChar){
-        case 'a':  return state_q1(input.substring(1))
-        case 'b':  return state_q9(input.substring(1))
-        case 'c':  return state_q12(input.substring(1))
-        case 'd':  return state_q19(input.substring(1))
-        case 'e':  return state_q27(input.substring(1))
-        case 'g':  return state_q33(input.substring(1))
-        case 'h':  return state_q37(input.substring(1))
-        case 'i':  return state_q40(input.substring(1))
-        case 'l':  return state_q43(input.substring(1))
-        case 'n':  return state_q48(input.substring(1))
-        case 's':  return state_q52(input.substring(1))
-        case 't':  return state_q56(input.substring(1))
-        case 'v':  return state_q62(input.substring(1))
-        case 'w':  return state_q66(input.substring(1))
-        default:   return trapState()
+        case 'a':  
+            process = process + ' > q1'
+            return state_q1(removeFirstChar(input), process)
+        case 'b':  
+            process = process + ' > q9'
+            return state_q9(removeFirstChar(input), process)
+        case 'c':  
+            process = process + ' > q12'
+            return state_q12(removeFirstChar(input), process)
+        case 'd':  
+            process = process + ' > q19'
+            return state_q19(removeFirstChar(input), process)
+        case 'e':  
+            process = process + ' > q27'
+            return state_q27(removeFirstChar(input), process)
+        case 'g':  
+            process = process + ' > q33'
+            return state_q33(removeFirstChar(input), process)
+        case 'h':  
+            process = process + ' > q37'
+            return state_q37(removeFirstChar(input), process)
+        case 'i':  
+            process = process + ' > q40'
+            return state_q40(removeFirstChar(input), process)
+        case 'l':  
+            process = process + ' > q43'
+            return state_q43(removeFirstChar(input), process)
+        case 'n':  
+            process = process + ' > q48'
+            return state_q48(removeFirstChar(input), process)
+        case 's':  
+            process = process + ' > q52'
+            return state_q52(removeFirstChar(input), process)
+        case 't':  
+            process = process + ' > q56'
+            return state_q56(removeFirstChar(input), process)
+        case 'v':  
+            process = process + ' > q62'
+            return state_q62(removeFirstChar(input), process)
+        case 'w':  
+            process = process + ' > q66'
+            return state_q66(removeFirstChar(input), process)
+        default:   
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     }
 }
 
-const trapState = ()=>{
+const trapState = (process)=>{
     return {
         isAccepted:false,
-        pattern: null
+        pattern: null,
+        process
     }
 }
-const acceptedState = (pattern)=>{
+const acceptedState = (pattern, process)=>{
     return {
         isAccepted:true,
-        pattern
+        pattern,
+        process
     }
 }
 
-const state_q1 = (input)=>{
+const state_q1 = (input, process)=>{
     let firstChar =input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 's': return state_q4(input.substring(1))
-        case 'n': return state_q2(input.substring(1))
-        case 'f': return state_q5(input.substring(1))
-        default:  return trapState()
+        case 's': 
+            process = process + ' > q4'
+            return state_q4(removeFirstChar(input), process)
+        case 'n': 
+            process = process + ' > q2'            
+            return state_q2(removeFirstChar(input), process)
+        case 'f': 
+            process = process + ' > q5'  
+            return state_q5(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     }
 }
 
-const state_q2 = (input) => {
+const state_q2 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 'd': return state_q3(input.substring(1))
-        default: return trapState()
+        case 'd': 
+            process = process + ' > q3'
+            return state_q3(removeFirstChar(input), process)
+        default: 
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q3 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('and')
+const state_q3 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('and', process)
 }
 
-const state_q4 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('as')
+const state_q4 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('as', process)
 }
 
-const state_q5 = (input) => {
+const state_q5 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 't': return state_q6(input.substring(1))
-        default: return trapState()
+        case 't': 
+            process = process + ' > q6'
+            return state_q6(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q6 = (input) => {
+const state_q6 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 'e': return state_q7(input.substring(1))
-        default: return trapState()
+        case 'e': 
+            process = process + ' > q7'
+            return state_q7(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q7 = (input) => {
+const state_q7 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 'r': return state_q8(input.substring(1))
-        default: return trapState()
+        case 'r': 
+            process = process + ' > q8'
+            return state_q8(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q8 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('after')
+const state_q8 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('after', process)
 }
 
-const state_q9 = (input) => {
+const state_q9 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 'u': return state_q10(input.substring(1))
-        default: return trapState()
+        case 'u': 
+            process = process + ' > q10'
+            return state_q10(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q10 = (input) => {
+const state_q10 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 't': return state_q11(input.substring(1))            
-        default: return trapState()
+        case 't': 
+            process = process + ' > q11'
+            return state_q11(removeFirstChar(input), process)            
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q11 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('but')
+const state_q11 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('but', process)
 }
 
-const state_q12 = (input) => {
+const state_q12 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'l': return state_q13(input.substring(1))
+        case 'l': 
+            process = process + ' > q13'
+            return state_q13(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q13 = (input) => {
+const state_q13 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q14(input.substring(1))            
-        default: return trapState()
+        case 'e': 
+            process = process + ' > q14'
+            return state_q14(removeFirstChar(input), process)            
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q14 = (input) => {
+const state_q14 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'a': return state_q15(input.substring(1))
+        case 'a': 
+            process = process + ' > q15'
+            return state_q15(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q15 = (input) => {
+const state_q15 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q16(input.substring(1))
+        case 'r': 
+            process = process + ' > q16'
+            return state_q16(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q16 = (input) => {
+const state_q16 = (input, process) => {
     if(input) {
         let firstChar = input.toLowerCase().charAt(0) 
         switch(firstChar){
-            case 'l': return state_q17(input.substring(1))
-            default: return trapState()
+            case 'l': 
+            process = process + ' > q17'
+            return state_q17(removeFirstChar(input), process)
+            default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
         } 
     }
-    return acceptedState('clear')
+    process = process + ' (accepted)'
+    return acceptedState('clear', process)
    
 }
 
-const state_q17 = (input) => {
+const state_q17 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'y': return state_q18(input.substring(1))            
-        default: return trapState()
+        case 'y': 
+            process = process + ' > q18'
+            return state_q18(removeFirstChar(input), process)            
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q18 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('clearly')
+const state_q18 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('clearly', process)
 }
 
-const state_q19 = (input) => {
+const state_q19 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q20(input.substring(1))
-        case 'a': return state_q23(input.substring(1))
+        case 'o': 
+            process = process + ' > q20'
+            return state_q20(removeFirstChar(input), process)
+        case 'a': 
+            process = process + ' > q23'
+            return state_q23(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q20 = (input) => {
+const state_q20 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'w': return state_q21(input.substring(1))
+        case 'w': 
+            process = process + ' > q21'
+            return state_q21(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q21 = (input) => {
+const state_q21 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
-        case 'n': return state_q22(input.substring(1))
-        default: return trapState()
+        case 'n': 
+            process = process + ' > q22'
+            return state_q22(removeFirstChar(input), process)
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q22 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('down')
+const state_q22 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('down', process)
 }
 
-const state_q23 = (input) => {
+const state_q23 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'i': return state_q24(input.substring(1))
+        case 'i': 
+            process = process + ' > q24'
+            return state_q24(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q24 = (input) => {
+const state_q24 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'l': return state_q25(input.substring(1))
+        case 'l': 
+            process = process + ' > q25'
+            return state_q25(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q25 = (input) => {
+const state_q25 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'y': return state_q26(input.substring(1))
+        case 'y': 
+            process = process + ' > q26'
+            return state_q26(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q26 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('daily')
+const state_q26 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('daily', process)
 }
 
-const state_q27 = (input) => {
+const state_q27 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'a': return state_q28(input.substring(1))            
-        default: return trapState()
+        case 'a': 
+            process = process + ' > q28'
+            return state_q28(removeFirstChar(input), process)            
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q28 = (input) => {
+const state_q28 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 's': return state_q29(input.substring(1))
+        case 's': 
+            process = process + ' > q29'
+            return state_q29(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q29 = (input) => {
+const state_q29 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'i': return state_q30(input.substring(1))
+        case 'i': 
+            process = process + ' > q30'
+            return state_q30(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q30 = (input) => {
+const state_q30 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'l': return state_q31(input.substring(1))
+        case 'l': 
+            process = process + ' > q31'
+            return state_q31(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q31 = (input) => {
+const state_q31 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'y': return state_q32(input.substring(1))
+        case 'y': 
+            process = process + ' > q32'
+            return state_q32(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q32 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('easily')
+const state_q32 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('easily', process)
 }
 
-const state_q33 = (input) => {
+const state_q33 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q34(input.substring(1))
+        case 'o': 
+            process = process + ' > q34'
+            return state_q34(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q34 = (input) => {
+const state_q34 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q35(input.substring(1))
+        case 'o': 
+            process = process + ' > q35'
+            return state_q35(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q35 = (input) => {
+const state_q35 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'd': return state_q36(input.substring(1))
+        case 'd': 
+            process = process + ' > q36'
+            return state_q36(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q36 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('good')
+const state_q36 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('good', process)
 }
 
-const state_q37 = (input) => {
+const state_q37 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q38(input.substring(1))
+        case 'o': 
+            process = process + ' > q38'
+            return state_q38(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q38 = (input) => {
+const state_q38 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'w': return state_q39(input.substring(1))
+        case 'w': 
+            process = process + ' > q39'
+            return state_q39(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q39 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('how')
+const state_q39 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('how', process)
 }
 
-const state_q40 = (input) => {
+const state_q40 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'f': return state_q41(input.substring(1))
-        case 'n': return state_q42(input.substring(1))
+        case 'f': 
+            process = process + ' > q41'
+            return state_q41(removeFirstChar(input), process)
+        case 'n': 
+            process = process + ' > q42'
+            return state_q42(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q41 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('if')
+const state_q41 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('if', process)
 }
 
 
-const state_q42= (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('in')
+const state_q42= (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('in', process)
 }
-const state_q43 = (input) => {
+const state_q43 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'a': return state_q44(input.substring(1))
+        case 'a': 
+            process = process + ' > q44'
+            return state_q44(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q44 = (input) => {
+const state_q44 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 't': return state_q45(input.substring(1))
+        case 't': 
+            process = process + ' > q45'
+            return state_q45(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q45 = (input) => {
+const state_q45 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q46(input.substring(1))
+        case 'e': 
+            process = process + ' > q46'
+            return state_q46(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q46 = (input) => {
+const state_q46 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q47(input.substring(1))
+        case 'r': 
+            process = process + ' > q47'
+            return state_q47(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q47 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('later')
+const state_q47 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('later', process)
 }
 
-const state_q48 = (input) => {
+const state_q48 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q49(input.substring(1))
+        case 'o': 
+            process = process + ' > q49'
+            return state_q49(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q49 = (input) => {
+const state_q49 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'w': return state_q50(input.substring(1))
-        case 't': return state_q51(input.substring(1))
+        case 'w': 
+            process = process + ' > q50'
+            return state_q50(removeFirstChar(input), process)
+        case 't': 
+            process = process + ' > q51'
+            return state_q51(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q50 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('now')
+const state_q50 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('now', process)
 }
 
-const state_q51 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('not')
+const state_q51 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('not', process)
 }
 
-const state_q52 = (input) => {
+const state_q52 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q53(input.substring(1))
+        case 'o': 
+            process = process + ' > q53'
+            return state_q53(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q53 = (input) => {
+const state_q53 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'm': return state_q54(input.substring(1))
+        case 'm': 
+            process = process + ' > q54'
+            return state_q54(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q54 = (input) => {
+const state_q54 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q55(input.substring(1))
+        case 'e': 
+            process = process + ' > q55'
+            return state_q55(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q55 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('some')
+const state_q55 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('some', process)
 }
 
-const state_q56 = (input) => {
+const state_q56 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'h': return state_q57(input.substring(1))
+        case 'h': 
+            process = process + ' > q57'
+            return state_q57(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q57 = (input) => {
+const state_q57 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'a': return state_q58(input.substring(1))
-        case 'e': return state_q60(input.substring(1))
+        case 'a': 
+            process = process + ' > q58'
+            return state_q58(removeFirstChar(input), process)
+        case 'e': 
+            process = process + ' > q60'
+            return state_q60(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q58 = (input) => {
+const state_q58 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 't': return state_q59(input.substring(1))
+        case 't': 
+            process = process + ' > q59'
+            return state_q59(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q59 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('that')
+const state_q59 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('that', process)
 }
 
 
-const state_q60 = (input) => {
+const state_q60 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'n': return state_q61(input.substring(1))
+        case 'n': 
+            process = process + ' > q61'
+            return state_q61(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q61 = (input) => {
-      if(input) 
-        return trapState()
-    return acceptedState('then')
+const state_q61 = (input, process) => {
+      if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('then', process)
 }
 
-const state_q62 = (input) => {
+const state_q62 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q63(input.substring(1))
+        case 'e': 
+            process = process + ' > q63'
+            return state_q63(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q63 = (input) => {
+const state_q63 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q64(input.substring(1))
+        case 'r': 
+            process = process + ' > q64'
+            return state_q64(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q64 = (input) => {
+const state_q64 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'y': return state_q65(input.substring(1))
+        case 'y': 
+            process = process + ' > q65'
+            return state_q65(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q65 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('very')
+const state_q65 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('very', process)
 }
 
-const state_q66 = (input) => {
+const state_q66 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'h': return state_q67(input.substring(1))
+        case 'h': 
+            process = process + ' > q67'
+            return state_q67(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q67= (input) => {
+const state_q67= (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'o': return state_q68(input.substring(1))
-        case 'e': return state_q73(input.substring(1))
-        case 'i': return state_q79(input.substring(1))
+        case 'o': 
+            process = process + ' > q68'
+            return state_q68(removeFirstChar(input), process)
+        case 'e': 
+            process = process + ' > q73'
+            return state_q73(removeFirstChar(input), process)
+        case 'i': 
+            process = process + ' > q79'
+            return state_q79(removeFirstChar(input), process)
  
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q68 = (input) => {
+const state_q68 = (input, process) => {
    if(input) {
         let firstChar = input.toLowerCase().charAt(0) 
         switch(firstChar){
-            case 'e': return state_q69(input.substring(1))
-            default: return trapState()
+            case 'e': 
+            process = process + ' > q69'
+            return state_q69(removeFirstChar(input), process)
+            default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
         } 
     }
-    return acceptedState('who')
+    process = process + ' (accepted)'
+    return acceptedState('who', process)
 }
 
-const state_q69 = (input) => {
+const state_q69 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'v': return state_q70(input.substring(1))
+        case 'v': 
+            process = process + ' > q70'
+            return state_q70(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q70 = (input) => {
+const state_q70 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q71(input.substring(1))
+        case 'e': 
+            process = process + ' > q71'
+            return state_q71(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q71 = (input) => {
+const state_q71 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q72(input.substring(1))
+        case 'r': 
+            process = process + ' > q72'
+            return state_q72(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q72 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('whoever')
+const state_q72 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('whoever', process)
 }
 
-const state_q73 = (input) => {
+const state_q73 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q74(input.substring(1))
+        case 'r': 
+            process = process + ' > q74'
+            return state_q74(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q74 = (input) => {
+const state_q74 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q75(input.substring(1))
+        case 'e': 
+            process = process + ' > q75'
+            return state_q75(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q75 = (input) => {
+const state_q75 = (input, process) => {
    if(input) {
         let firstChar = input.toLowerCase().charAt(0) 
         switch(firstChar){
-            case 'v': return state_q76(input.substring(1))
-            default: return trapState()
+            case 'v': 
+            process = process + ' > q76'
+            return state_q76(removeFirstChar(input), process)
+            default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
         } 
     }
-    return acceptedState('where')
+    process = process + ' (accepted)'
+    return acceptedState('where', process)
 }
 
-const state_q76 = (input) => {
+const state_q76 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q77(input.substring(1))
+        case 'e': 
+            process = process + ' > q77'
+            return state_q77(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q77 = (input) => {
+const state_q77 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q78(input.substring(1))
+        case 'r': 
+            process = process + ' > q78'
+            return state_q78(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q78 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('wherever')
+const state_q78 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('wherever', process)
 }
 
-const state_q79 = (input) => {
+const state_q79 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'c': return state_q80(input.substring(1))
+        case 'c': 
+            process = process + ' > q80'
+            return state_q80(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q80 = (input) => {
+const state_q80 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'h': return state_q81(input.substring(1))
+        case 'h': 
+            process = process + ' > q81'
+            return state_q81(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q81 = (input) => {
+const state_q81 = (input, process) => {
     if(input) {
         let firstChar = input.toLowerCase().charAt(0) 
         switch(firstChar){
-            case 'e': return state_q82(input.substring(1))
-            default: return trapState()
+            case 'e': 
+            process = process + ' > q82'
+            return state_q82(removeFirstChar(input), process)
+            default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
         } 
     }
-    return acceptedState('which')
+    process = process + ' (accepted)'
+    return acceptedState('which', process)
 }
 
-const state_q82 = (input) => {
+const state_q82 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'v': return state_q83(input.substring(1))
+        case 'v': 
+            process = process + ' > q83'
+            return state_q83(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q83 = (input) => {
+const state_q83 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'e': return state_q84(input.substring(1))
+        case 'e': 
+            process = process + ' > q84'
+            return state_q84(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q84 = (input) => {
+const state_q84 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){
         
-        case 'r': return state_q85(input.substring(1))
+        case 'r': 
+            process = process + ' > q85'
+            return state_q85(removeFirstChar(input), process)
             
-        default: return trapState()
+        default:  
+            process = process + ' > trapped state / rejected'
+            return trapState(process)
     } 
 }
 
-const state_q85 = (input) => {
-   if(input) 
-        return trapState()
-    return acceptedState('whichever')
+const state_q85 = (input, process) => {
+   if(input) {
+       process = process + ' > trapped state / rejected'
+        return trapState(process)
+    }
+    process = process + ' (accepted)'
+    return acceptedState('whichever', process)
 }
 /////////////////////////////////////////
 
