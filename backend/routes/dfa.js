@@ -74,6 +74,7 @@ const processDFA = (stringArray) => {
             let result = checkState_q0(word)
             formattedString.push({
                 ...result,
+                index: i,
                 name: stringArray[i]
                 
             })

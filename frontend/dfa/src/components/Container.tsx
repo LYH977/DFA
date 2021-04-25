@@ -1,7 +1,7 @@
 import React from "react";
 import InputString from "./InputString";
 import Checkboxes from "./pattern/Checkboxes";
-import Occurences from "./pattern/Occurences";
+import Occurences from "./pattern/Process";
 //MUI
 import Box from "@material-ui/core/Box";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";

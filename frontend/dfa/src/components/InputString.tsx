@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { InputContent, InputContext, PatternContext } from "../contexts";
+import { InputContent, InputContext, PatternContext, WordContext } from "../contexts";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
+import { SET_WORD } from "./Constant";
 
 const useStyles = makeStyles({
   root: {
@@ -35,7 +36,6 @@ const useStyles = makeStyles({
     "&:hover": {
       background: "rgb(255, 0, 0)",
       cursor: "pointer",
-      // color: "white",
     },
   },
   pos: {
@@ -52,7 +52,41 @@ function InputString() {
   const classes = useStyles();
   const inputContext = useContext(InputContext);
   const patternContext = useContext(PatternContext);
-  // console.log({ patternContext });
+  const wordContext = useContext(WordContext);
+
+  const handleClickWord = (name: string, process: string, index: number) => {
+    wordContext.dispatch({ type: SET_WORD, payload: { name, process, index } });
+  };
+
+  const contentMarkup = (obj: InputContent, id: number) => {
+    let regex = /[a-z0-9A-Z]+/;
+    if (regex.test(obj.name)) {
+      let lowercaseName = obj.name.toLowerCase();
+      let titleClass =
+        patternContext.state[lowercaseName] && patternContext.state[lowercaseName]["isChecked"]
+          ? classes.coloredTitle
+          : classes.title;
+      let style = id === wordContext.state.index ? { background: "yellow" } : {};
+      return (
+        <Typography
+          className={titleClass}
+          style={style}
+          color="textPrimary"
+          display="inline"
+          key={id}
+          onClick={(e) => handleClickWord(obj.name, obj.process, obj.index)}
+        >
+          {obj.name}
+        </Typography>
+      );
+    }
+    return (
+      // char such as symbol, whitespace
+      <Typography className={classes.colorlessText} color="textPrimary" display="inline" key={id}>
+        {obj.name}
+      </Typography>
+    );
+  };
 
   return (
     <div className={classes.div}>
@@ -60,20 +94,7 @@ function InputString() {
         Input
       </Typography>
       <Card className={classes.root}>
-        <CardContent>
-          {inputContext.state.map((obj: InputContent, id: number) => {
-            let lowercaseName = obj.name.toLowerCase();
-            let style =
-              patternContext.state[lowercaseName] && patternContext.state[lowercaseName]["isChecked"]
-                ? classes.coloredTitle
-                : classes.title;
-            return (
-              <Typography className={style} color="textPrimary" display="inline" key={id}>
-                {obj.name}
-              </Typography>
-            );
-          })}
-        </CardContent>
+        <CardContent>{inputContext.state.map((obj: InputContent, id: number) => contentMarkup(obj, id))}</CardContent>
       </Card>
     </div>
   );

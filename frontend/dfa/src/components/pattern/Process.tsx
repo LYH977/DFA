@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { PatternContext, PatternObj } from "../../contexts";
+import { WordContext } from "../../contexts";
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -17,9 +17,11 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles({
   cardRoot: {
     minWidth: 275,
+    maxWidth: 275,
     overflow: "auto",
     minHeight: "100%",
     maxHeight: "100%",
+    wordWrap: "break-word",
   },
   listRoot: {
     display: "flex",
@@ -28,9 +30,10 @@ const useStyles = makeStyles({
   title: {
     fontSize: 14,
   },
-  boldText: {
+  decoratedText: {
     fontSize: 14,
     fontWeight: "bold",
+    textDecoration: "underline",
   },
 
   formControl: {
@@ -45,33 +48,30 @@ const useStyles = makeStyles({
 });
 
 function Occurences() {
-  const inputContext = useContext(PatternContext);
+  const wordContext = useContext(WordContext);
 
   const classes = useStyles();
 
   return (
     <div className={classes.div}>
+      <Typography className={classes.title} color="textSecondary" gutterBottom>
+        Info
+      </Typography>
       <Card className={classes.cardRoot} variant="outlined">
         <CardContent>
-          {inputContext.state &&
-            Object.keys(inputContext.state)
-              .sort()
-              .map((name, id) =>
-                inputContext.state[name].isChecked ? (
-                  <>
-                    <Typography className={classes.title} component="h2" gutterBottom>
-                      {"Pattern : "}
-                      <Typography className={classes.boldText} display="inline">
-                        '{name}'
-                      </Typography>
-                    </Typography>
-                    <Typography className={classes.title} component="h2">
-                      Occurence : {inputContext.state[name].occurence}
-                    </Typography>
-                    <Divider />
-                  </>
-                ) : null
-              )}
+          <Typography className={classes.decoratedText} variant="button" component="h2">
+            Word:
+          </Typography>
+          <Typography className={classes.title} variant="caption" component="h2">
+            {wordContext.state.name}
+          </Typography>
+          <br />
+          <Typography className={classes.decoratedText} variant="button" component="h2">
+            State change:
+          </Typography>
+          <Typography className={classes.title} variant="caption" component="h2">
+            {wordContext.state.process}
+          </Typography>
         </CardContent>
       </Card>
     </div>

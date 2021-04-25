@@ -1,8 +1,9 @@
 import React, { useContext, useState, useReducer } from "react";
-import { SET_INPUT, SET_PATTERN, TOGGLE_PATTERN_ISCHECKED } from "../components/Constant";
+import { SET_INPUT, SET_PATTERN, SET_WORD, TOGGLE_PATTERN_ISCHECKED } from "../components/Constant";
 
 export const PatternContext = React.createContext<any>(null);
 export const InputContext = React.createContext<any>(null);
+export const WordContext = React.createContext<any>(null);
 //--------------------------------------------------------------------------------------------------
 
 export interface InputContent {
@@ -10,6 +11,7 @@ export interface InputContent {
   isAccepted: boolean;
   pattern: string | null;
   process: string;
+  index: number;
 }
 
 interface iAction {
@@ -29,6 +31,16 @@ const inputReducer = (state: InputContent[], action: iAction) => {
       return state;
   }
 };
+
+export const initialInput: InputContent[] = [
+  {
+    name: "Waiting for text file upload...",
+    isAccepted: true,
+    pattern: null,
+    process: "empty",
+    index: 0,
+  },
+];
 //--------------------------------------------------------------------------------------------------
 export type PatternObj = {
   [key: string]: PatternContent;
@@ -65,22 +77,41 @@ const patternReducer = (state: PatternObj, action: pAction) => {
   }
 };
 //--------------------------------------------------------------------------------------------------
+export interface WordContent {
+  index: number | null;
+  name: string;
+  process: string;
+}
+
+interface wAction {
+  type: string;
+  payload: WordContent;
+}
+
+interface wContext {
+  state: WordContent;
+  dispatch: React.Dispatch<wAction>;
+}
+const wordReducer = (state: WordContent, action: wAction) => {
+  switch (action.type) {
+    case SET_WORD:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const initialWord: WordContent = {
+  name: "-",
+  process: "-",
+  index: null,
+};
+//--------------------------------------------------------------------------------------------------
 
 export const ContextProvider: React.FC = ({ children }) => {
-  const testpattern: PatternObj = {
-    eren: { occurence: 1, isChecked: false },
-    mikasa: { occurence: 1, isChecked: false },
-    armin: { occurence: 1, isChecked: false },
-  };
+  const [word, dispatchWord] = useReducer(wordReducer, initialWord);
   const [pattern, dispatchPattern] = useReducer(patternReducer, {});
-  const [input, dispatchInput] = useReducer(inputReducer, [
-    {
-      name: "Waiting for text file upload...",
-      isAccepted: true,
-      pattern: null,
-      process: "empty",
-    },
-  ]);
+  const [input, dispatchInput] = useReducer(inputReducer, initialInput);
   const pProvider: pContext = {
     state: pattern,
     dispatch: dispatchPattern,
@@ -89,9 +120,15 @@ export const ContextProvider: React.FC = ({ children }) => {
     state: input,
     dispatch: dispatchInput,
   };
+  const wProvider: wContext = {
+    state: word,
+    dispatch: dispatchWord,
+  };
   return (
     <PatternContext.Provider value={pProvider}>
-      <InputContext.Provider value={iProvider}>{children}</InputContext.Provider>
+      <InputContext.Provider value={iProvider}>
+        <WordContext.Provider value={wProvider}>{children}</WordContext.Provider>
+      </InputContext.Provider>
     </PatternContext.Provider>
   );
 };

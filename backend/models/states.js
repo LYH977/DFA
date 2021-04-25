@@ -5,7 +5,7 @@ const removeFirstChar = (str) =>{
 
 const checkState_q0 = (input) =>{
     let firstChar =input.toLowerCase().charAt(0) 
-    let process = `${firstChar}`
+    let process = `q0`
     switch(firstChar){
         case 'a':  
             process = process + ' > q1'
@@ -50,7 +50,7 @@ const checkState_q0 = (input) =>{
             process = process + ' > q66'
             return state_q66(removeFirstChar(input), process)
         default:   
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     }
 }
@@ -83,7 +83,7 @@ const state_q1 = (input, process)=>{
             process = process + ' > q5'  
             return state_q5(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     }
 }
@@ -95,14 +95,14 @@ const state_q2 = (input, process) => {
             process = process + ' > q3'
             return state_q3(removeFirstChar(input), process)
         default: 
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q3 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -111,7 +111,7 @@ const state_q3 = (input, process) => {
 
 const state_q4 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -125,7 +125,7 @@ const state_q5 = (input, process) => {
             process = process + ' > q6'
             return state_q6(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -137,7 +137,7 @@ const state_q6 = (input, process) => {
             process = process + ' > q7'
             return state_q7(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -149,14 +149,14 @@ const state_q7 = (input, process) => {
             process = process + ' > q8'
             return state_q8(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q8 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -170,7 +170,7 @@ const state_q9 = (input, process) => {
             process = process + ' > q10'
             return state_q10(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -183,14 +183,14 @@ const state_q10 = (input, process) => {
             process = process + ' > q11'
             return state_q11(removeFirstChar(input), process)            
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q11 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -206,7 +206,7 @@ const state_q12 = (input, process) => {
             return state_q13(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -219,7 +219,7 @@ const state_q13 = (input, process) => {
             process = process + ' > q14'
             return state_q14(removeFirstChar(input), process)            
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -233,7 +233,7 @@ const state_q14 = (input, process) => {
             return state_q15(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -247,7 +247,7 @@ const state_q15 = (input, process) => {
             return state_q16(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -260,7 +260,7 @@ const state_q16 = (input, process) => {
             process = process + ' > q17'
             return state_q17(removeFirstChar(input), process)
             default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
         } 
     }
@@ -277,14 +277,14 @@ const state_q17 = (input, process) => {
             process = process + ' > q18'
             return state_q18(removeFirstChar(input), process)            
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q18 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -303,7 +303,7 @@ const state_q19 = (input, process) => {
             return state_q23(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -317,7 +317,7 @@ const state_q20 = (input, process) => {
             return state_q21(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -329,14 +329,14 @@ const state_q21 = (input, process) => {
             process = process + ' > q22'
             return state_q22(removeFirstChar(input), process)
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q22 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -352,7 +352,7 @@ const state_q23 = (input, process) => {
             return state_q24(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -366,7 +366,7 @@ const state_q24 = (input, process) => {
             return state_q25(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -380,14 +380,14 @@ const state_q25 = (input, process) => {
             return state_q26(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q26 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -402,7 +402,7 @@ const state_q27 = (input, process) => {
             process = process + ' > q28'
             return state_q28(removeFirstChar(input), process)            
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -416,7 +416,7 @@ const state_q28 = (input, process) => {
             return state_q29(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -430,7 +430,7 @@ const state_q29 = (input, process) => {
             return state_q30(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -444,7 +444,7 @@ const state_q30 = (input, process) => {
             return state_q31(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -458,14 +458,14 @@ const state_q31 = (input, process) => {
             return state_q32(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q32 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -481,7 +481,7 @@ const state_q33 = (input, process) => {
             return state_q34(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -495,7 +495,7 @@ const state_q34 = (input, process) => {
             return state_q35(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -509,14 +509,14 @@ const state_q35 = (input, process) => {
             return state_q36(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q36 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -532,7 +532,7 @@ const state_q37 = (input, process) => {
             return state_q38(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -546,14 +546,14 @@ const state_q38 = (input, process) => {
             return state_q39(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q39 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -572,14 +572,14 @@ const state_q40 = (input, process) => {
             return state_q42(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q41 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -589,7 +589,7 @@ const state_q41 = (input, process) => {
 
 const state_q42= (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -604,7 +604,7 @@ const state_q43 = (input, process) => {
             return state_q44(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -618,7 +618,7 @@ const state_q44 = (input, process) => {
             return state_q45(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -632,7 +632,7 @@ const state_q45 = (input, process) => {
             return state_q46(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -646,14 +646,14 @@ const state_q46 = (input, process) => {
             return state_q47(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q47 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -669,7 +669,7 @@ const state_q48 = (input, process) => {
             return state_q49(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -686,14 +686,14 @@ const state_q49 = (input, process) => {
             return state_q51(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q50 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -702,7 +702,7 @@ const state_q50 = (input, process) => {
 
 const state_q51 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -718,7 +718,7 @@ const state_q52 = (input, process) => {
             return state_q53(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -732,7 +732,7 @@ const state_q53 = (input, process) => {
             return state_q54(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -746,14 +746,14 @@ const state_q54 = (input, process) => {
             return state_q55(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q55 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -769,7 +769,7 @@ const state_q56 = (input, process) => {
             return state_q57(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -786,7 +786,7 @@ const state_q57 = (input, process) => {
             return state_q60(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -800,14 +800,14 @@ const state_q58 = (input, process) => {
             return state_q59(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q59 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -824,14 +824,14 @@ const state_q60 = (input, process) => {
             return state_q61(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q61 = (input, process) => {
       if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -847,7 +847,7 @@ const state_q62 = (input, process) => {
             return state_q63(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -861,7 +861,7 @@ const state_q63 = (input, process) => {
             return state_q64(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -875,14 +875,14 @@ const state_q64 = (input, process) => {
             return state_q65(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q65 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -898,7 +898,7 @@ const state_q66 = (input, process) => {
             return state_q67(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -918,7 +918,7 @@ const state_q67= (input, process) => {
             return state_q79(removeFirstChar(input), process)
  
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -931,7 +931,7 @@ const state_q68 = (input, process) => {
             process = process + ' > q69'
             return state_q69(removeFirstChar(input), process)
             default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
         } 
     }
@@ -948,7 +948,7 @@ const state_q69 = (input, process) => {
             return state_q70(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -962,7 +962,7 @@ const state_q70 = (input, process) => {
             return state_q71(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -976,14 +976,14 @@ const state_q71 = (input, process) => {
             return state_q72(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q72 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -999,7 +999,7 @@ const state_q73 = (input, process) => {
             return state_q74(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1013,7 +1013,7 @@ const state_q74 = (input, process) => {
             return state_q75(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1026,7 +1026,7 @@ const state_q75 = (input, process) => {
             process = process + ' > q76'
             return state_q76(removeFirstChar(input), process)
             default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
         } 
     }
@@ -1043,7 +1043,7 @@ const state_q76 = (input, process) => {
             return state_q77(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1057,14 +1057,14 @@ const state_q77 = (input, process) => {
             return state_q78(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q78 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'
@@ -1080,7 +1080,7 @@ const state_q79 = (input, process) => {
             return state_q80(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1094,7 +1094,7 @@ const state_q80 = (input, process) => {
             return state_q81(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1107,7 +1107,7 @@ const state_q81 = (input, process) => {
             process = process + ' > q82'
             return state_q82(removeFirstChar(input), process)
             default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
         } 
     }
@@ -1124,7 +1124,7 @@ const state_q82 = (input, process) => {
             return state_q83(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1138,7 +1138,7 @@ const state_q83 = (input, process) => {
             return state_q84(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
@@ -1152,14 +1152,14 @@ const state_q84 = (input, process) => {
             return state_q85(removeFirstChar(input), process)
             
         default:  
-            process = process + ' > trapped state / rejected'
+            process = process + ' > trapped state/rejected'
             return trapState(process)
     } 
 }
 
 const state_q85 = (input, process) => {
    if(input) {
-       process = process + ' > trapped state / rejected'
+       process = process + ' > trapped state/rejected'
         return trapState(process)
     }
     process = process + ' (accepted)'

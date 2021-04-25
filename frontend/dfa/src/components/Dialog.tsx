@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import axios from "axios";
-import { InputContext, PatternContext } from "../contexts";
-import { SET_INPUT, SET_PATTERN } from "./Constant";
+import { initialWord, InputContext, PatternContext, WordContext } from "../contexts";
+import { SET_INPUT, SET_PATTERN, SET_WORD } from "./Constant";
 //MUI
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
   const inputContext = useContext(InputContext);
   const patternContext = useContext(PatternContext);
+  const wordContext = useContext(WordContext);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const classes = useStyles();
@@ -76,12 +77,14 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
   const [message, setMessage] = useState("No message");
 
   const handleConfirm = async () => {
-    setIsInValid(true);
     setLoading(true);
+    setIsInValid(true);
+
     try {
       let response = await axios.post("http://localhost:5000/api/dfa/result", {
         inputString: inputString,
       });
+      wordContext.dispatch({ type: SET_WORD, payload: initialWord });
       inputContext.dispatch({ type: SET_INPUT, payload: response.data.formattedString });
       patternContext.dispatch({ type: SET_PATTERN, payload: response.data.patterns });
       setSeverity("success");
