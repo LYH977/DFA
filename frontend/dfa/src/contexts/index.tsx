@@ -34,7 +34,8 @@ const inputReducer = (state: InputContent[], action: iAction) => {
 
 export const initialInput: InputContent[] = [
   {
-    name: "Waiting for text file upload...",
+    name: `Waiting for text file
+     upload...`,
     isAccepted: true,
     pattern: null,
     process: "empty",

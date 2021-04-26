@@ -1,21 +1,35 @@
 
 
-const ACCEPTED_LANGUAGE_OBJ = {
-    a: ['and', 'as', 'after'],
-    b: ['but'],
-    c: ['clear','clearly'],
-    d: ['down','daily'],
-    e: ['easily'],
-    g: ['good'],
-    h: ['how'],
-    i: ['in','if'],
-    l: ['later'],
-    n: ['now', 'not'],
-    s: ['some'],
-    t: ['then','that'],
-    v: ['very'],
-    w: ['who','whoever','where','wherever','which','whichever'],
+
+
+
+
+const conjunction = ['after','as','before', 'when','while','until','since','soon','once']
+const adjective = ['annual','daily', 'early','fast','future','late','old','quick','rapid','slow']
+const adverb = ['yesterday','today', 'tomorrow','later','now','never','sometimes','often','anually','lately','quickly','rapidly','slowly']
+
+
+const ACCEPTED_LANGUAGE_SCOPE= {
+    a: ['after','as', 'annual','anually'],
+    b: ['before'],
+    d: ['daily'],
+    e: ['early'],
+    f: ['fast', 'future'],
+    l: ['late','later','lately'],
+    n: ['now','never'],
+    o: ['once','often','old'],
+    q: ['quick','quickly'],
+    r: ['rapid','rapidly'],
+    s: ['since','soon', 'slow','slowly','sometimes'],
+    t: ['today','tomorrow'],
+    u: ['until'],
+    w: ['when','while'],
+    y: ['yesterday'],
+
+
+
+
 }
 
-module.exports = ACCEPTED_LANGUAGE_OBJ
+module.exports = ACCEPTED_LANGUAGE_SCOPE
 

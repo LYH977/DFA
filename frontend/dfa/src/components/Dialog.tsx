@@ -84,6 +84,7 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
       let response = await axios.post("http://localhost:5000/api/dfa/result", {
         inputString: inputString,
       });
+      console.log(response.data);
       wordContext.dispatch({ type: SET_WORD, payload: initialWord });
       inputContext.dispatch({ type: SET_INPUT, payload: response.data.formattedString });
       patternContext.dispatch({ type: SET_PATTERN, payload: response.data.patterns });
@@ -120,7 +121,7 @@ const UploadFileDialog: React.FC<Props> = ({ openModal, setOpenModal }) => {
     let reader = new FileReader();
     reader.onload = async function (event: ProgressEvent<FileReader>) {
       let text = (event.target as FileReader).result;
-      // alert(text);
+      // console.log(text);
       setInputString(text as string);
     };
     reader.readAsText(file);

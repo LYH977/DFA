@@ -7,16 +7,12 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import PublishIcon from "@material-ui/icons/Publish";
 import LanguageIcon from "@material-ui/icons/Language";
 import Popover from "@material-ui/core/Popover";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -32,6 +28,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     popoverText: {
       padding: theme.spacing(2),
+    },
+    popoverTitle: {
+      padding: "10px 10px 0 10px",
+      fontWeight: "bold",
+      textDecoration: "underline",
     },
     popoverStyle: {
       height: 300,
@@ -87,6 +88,7 @@ export const Navbar: React.FC = () => {
         horizontal: "center",
       }}
     >
+      <Typography className={classes.popoverTitle}>{"Patterns"}</Typography>
       {languages && (
         <List dense={true}>
           {languages.map((language, id) => (

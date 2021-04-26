@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { SET_WORD } from "./Constant";
+import { NEWLINE_REGEX, SET_WORD, WORD_REGEX } from "./Constant";
 
 const useStyles = makeStyles({
   root: {
@@ -59,8 +59,7 @@ function InputString() {
   };
 
   const contentMarkup = (obj: InputContent, id: number) => {
-    let regex = /[a-z0-9A-Z]+/;
-    if (regex.test(obj.name)) {
+    if (WORD_REGEX.test(obj.name)) {
       let lowercaseName = obj.name.toLowerCase();
       let titleClass =
         patternContext.state[lowercaseName] && patternContext.state[lowercaseName]["isChecked"]
@@ -79,6 +78,9 @@ function InputString() {
           {obj.name}
         </Typography>
       );
+    }
+    if (NEWLINE_REGEX.test(obj.name)) {
+      return <br />;
     }
     return (
       // char such as symbol, whitespace
