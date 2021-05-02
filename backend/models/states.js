@@ -1206,7 +1206,9 @@ const state_q87 = (input, process) => {
         case 'm': 
             process += ' > q88'
             return state_q88(removeFirstChar(input), process)
-            
+        case 'o': 
+            process += ' > q127'
+            return state_q127(removeFirstChar(input), process)
         default:  
             process += ' > trapped state/rejected'
             return trapState(process)
@@ -1712,6 +1714,27 @@ const state_q126 = (input, process) => {
     }
     process += ' (accepted)'
     return acceptedState('yesterday', process)
+}
+
+const state_q127 = (input, process) => {
+   let firstChar = input.toLowerCase().charAt(0) 
+    switch(firstChar){
+        case 'n': 
+            process += ' > q128'
+            return state_q128(removeFirstChar(input), process)
+        default:  
+            process += ' > trapped state/rejected'
+            return trapState(process)
+    } 
+}
+
+const state_q128 = (input, process) => {
+   if(input) {
+       process += ' > trapped state/rejected'
+        return trapState(process)
+    }
+    process += ' (accepted)'
+    return acceptedState('soon', process)
 }
 /////////////////////////////////////////
 

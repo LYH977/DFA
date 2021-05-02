@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { InputContent, InputContext, PatternContext, WordContext } from "../contexts";
+import { NEWLINE_REGEX, SET_WORD, WORD_REGEX } from "./Constant";
+
 //MUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { NEWLINE_REGEX, SET_WORD, WORD_REGEX } from "./Constant";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +23,11 @@ const useStyles = makeStyles({
     transform: "scale(0.8)",
   },
   title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textDecoration: "underline",
+  },
+  normalText: {
     fontSize: 14,
     "&:hover": {
       backgroundColor: "rgb(255, 222, 222)",
@@ -30,7 +37,7 @@ const useStyles = makeStyles({
   colorlessText: {
     fontSize: 14,
   },
-  coloredTitle: {
+  coloredText: {
     fontSize: 14,
     background: "rgb(255, 150, 150)",
     "&:hover": {
@@ -61,21 +68,31 @@ function InputString() {
   const contentMarkup = (obj: InputContent, id: number) => {
     if (WORD_REGEX.test(obj.name)) {
       let lowercaseName = obj.name.toLowerCase();
-      let titleClass =
+      let textClass =
         patternContext.state[lowercaseName] && patternContext.state[lowercaseName]["isChecked"]
-          ? classes.coloredTitle
-          : classes.title;
-      let style = id === wordContext.state.index ? { background: "yellow" } : {};
+          ? classes.coloredText
+          : classes.normalText;
+      let style =
+        id === wordContext.state.index
+          ? textClass === classes.coloredText
+            ? { background: "orange" }
+            : { background: "yellow" }
+          : {};
+      let fWeight = id === wordContext.state.index ? "fontWeightBold" : "fontWeightMedium";
       return (
         <Typography
-          className={titleClass}
-          style={style}
+          component="div"
+          className={textClass}
           color="textPrimary"
           display="inline"
           key={id}
-          onClick={(e) => handleClickWord(obj.name, obj.process, obj.index)}
+          onClick={(e: React.MouseEvent<HTMLSpanElement, MouseEvent>) =>
+            handleClickWord(obj.name, obj.process, obj.index)
+          }
         >
-          {obj.name}
+          <Box fontWeight={fWeight} m={1} display="inline" padding={0} margin={0} style={style}>
+            {obj.name}
+          </Box>
         </Typography>
       );
     }
@@ -92,7 +109,7 @@ function InputString() {
 
   return (
     <div className={classes.div}>
-      <Typography className={classes.colorlessText} color="textPrimary" gutterBottom>
+      <Typography className={classes.title} color="textPrimary" gutterBottom>
         Input
       </Typography>
       <Card className={classes.root}>

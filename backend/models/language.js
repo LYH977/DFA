@@ -5,12 +5,12 @@
 
 
 const conjunction = ['after','as','before', 'when','while','until','since','soon','once']
-const adjective = ['annual','daily', 'early','fast','future','late','old','quick','rapid','slow']
-const adverb = ['yesterday','today', 'tomorrow','later','now','never','sometimes','often','anually','lately','quickly','rapidly','slowly']
+const adjective = ['annual','late','quick','rapid','slow', 'future','old', 'fast', 'early','daily']
+const adverb = ['annually','lately','quickly','rapidly','slowly', 'never','sometimes','often', 'yesterday','today', 'tomorrow','later','now']
 
 
 const ACCEPTED_LANGUAGE_SCOPE= {
-    a: ['after','as', 'annual','anually'],
+    a: ['after','as', 'annual','annually'],
     b: ['before'],
     d: ['daily'],
     e: ['early'],

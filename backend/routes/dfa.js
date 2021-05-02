@@ -89,7 +89,7 @@ const processDFA = (stringArray) => {
         for(let i=0 ; i<stringArray.length ; i++){                   // for each word in the string          (' baebe because  Eren and Mikasa are very happy! or \nsad?')
             let word = stringArray[i].toLowerCase()
 
-             if (NEWLINE_REGEX.test(word)){ // check newline
+             if (NEWLINE_REGEX.test(word)){ 
                 let symbolArray = word.split(NEWLINE_REGEX);
                 for(let j=0 ; j<symbolArray.length ; j++){
                     if(symbolArray[j].length === 0 )  continue;
@@ -121,6 +121,8 @@ const processDFA = (stringArray) => {
         return {formattedString, patterns}
 
 }
+
+
 
 function sleep(ms) {
   return new Promise((resolve) => {

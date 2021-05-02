@@ -62,7 +62,7 @@ function Occurences() {
           <Typography className={classes.decoratedText} variant="button" component="h2">
             Word:
           </Typography>
-          <Typography className={classes.title} variant="caption" style={{ background: "yellow" }}>
+          <Typography className={classes.title} variant="caption">
             {wordContext.state.name}
           </Typography>
           <br />
