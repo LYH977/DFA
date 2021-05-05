@@ -1,10 +1,25 @@
 const removeFirstChar = (str) =>{
     return str.substring(1)
 }
+const trapState = (process)=>{
+    return {
+        isAccepted:false,
+        pattern: null,
+        process
+    }
+}
+const acceptedState = (pattern, process)=>{
+    return {
+        isAccepted:true,
+        pattern,
+        process
+    }
+}
+
 
 
 const checkState_q0 = (input) =>{
-    let firstChar =input.toLowerCase().charAt(0) 
+    let firstChar =input.toLowerCase().charAt(0)    //take the 1st char to be examined
     let process = `q0`
     switch(firstChar){
         case 'a':  
@@ -58,21 +73,6 @@ const checkState_q0 = (input) =>{
     }
 }
 
-const trapState = (process)=>{
-    return {
-        isAccepted:false,
-        pattern: null,
-        process
-    }
-}
-const acceptedState = (pattern, process)=>{
-    return {
-        isAccepted:true,
-        pattern,
-        process
-    }
-}
-
 const state_q1 = (input, process)=>{
     let firstChar =input.toLowerCase().charAt(0) 
     switch(firstChar){
@@ -90,6 +90,7 @@ const state_q1 = (input, process)=>{
             return trapState(process)
     }
 }
+
 const state_q2 = (input, process) => {
    if(input) {
        process += ' > trapped state/rejected'
@@ -110,8 +111,6 @@ const state_q3 = (input, process) => {
             return trapState(process)
     } 
 }
-
-
 
 const state_q4 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
@@ -1695,6 +1694,9 @@ const state_q124 = (input, process) => {
     } 
 }
 
+//                .
+//                .
+//                .
 const state_q125 = (input, process) => {
    let firstChar = input.toLowerCase().charAt(0) 
     switch(firstChar){

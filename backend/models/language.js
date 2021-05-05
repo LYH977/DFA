@@ -1,9 +1,4 @@
 
-
-
-
-
-
 const conjunction = ['after','as','before', 'when','while','until','since','soon','once']
 const adjective = ['annual','late','quick','rapid','slow', 'future','old', 'fast', 'early','daily']
 const adverb = ['annually','lately','quickly','rapidly','slowly', 'never','sometimes','often', 'yesterday','today', 'tomorrow','later','now']
@@ -26,10 +21,8 @@ const ACCEPTED_LANGUAGE_SCOPE= {
     w: ['when','while'],
     y: ['yesterday'],
 
-
-
-
 }
+
 
 module.exports = ACCEPTED_LANGUAGE_SCOPE
 

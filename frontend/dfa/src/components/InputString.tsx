@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { InputContent, InputContext, PatternContext, WordContext } from "../contexts";
 import { NEWLINE_REGEX, SET_WORD, WORD_REGEX } from "./Constant";
 

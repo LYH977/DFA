@@ -1,4 +1,4 @@
-import React, { useContext, useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import { SET_INPUT, SET_PATTERN, SET_WORD, TOGGLE_PATTERN_ISCHECKED } from "../components/Constant";
 
 export const PatternContext = React.createContext<any>(null);
