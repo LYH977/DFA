@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
+// import { debounce } from 'lodash';
+// import Test from './Test';
+// import { Shadow } from './Shadow';
+// import RefVSCB from './RefVSCB';
+import AppTest from './AppTest';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppTest />
   </React.StrictMode>,
   document.getElementById('root')
 );
